@@ -1,5 +1,6 @@
 const { expect } = require('chai')
 const { ethers } = require('hardhat')
+const {parseEther} = ethers.utils
 
 describe('Doodles', function () {
   let Doodles, doodlesContract, owner, addr1, addr2, addr3, addrs
@@ -38,9 +39,9 @@ describe('Doodles', function () {
       })
 
       it('Should should set _allowList by owner', async function () {
-        await expect(
+        await 
           doodlesContract.connect(owner).setAllowList([addr1.address], 10),
-        )
+        
 
         expect(await doodlesContract.numAvailableToMint(addr1.address)).to.equal(
           10,
@@ -126,8 +127,9 @@ describe('Doodles', function () {
         await doodlesContract.connect(owner).setAllowList([addr1.address], 1)
         await expect(
           doodlesContract.connect(addr1).mintAllowList(1, overrides),
-        ).to.be.revertedWith('Ether value sent is not correct')
-      })
+        ).to.be.reverted
+        
+       
   
       it('Should mint token', async function () {
         const baseurl = 'ipfs://test.url/'
@@ -307,4 +309,4 @@ describe('Doodles', function () {
       })
     })
   })
-})
+})})
